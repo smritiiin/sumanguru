@@ -5,6 +5,7 @@ import Services from "../components/Services";
 import Expertise from "../components/Expertise";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
+import MiniChartCalculator from "../components/MiniChartCalculator";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <Hero />
       <About />
       <Services />
+      <MiniChartCalculator />
       <Expertise />
       <Contact />
       <Footer />

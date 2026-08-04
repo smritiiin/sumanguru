@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Compass, ArrowUpRight, ChevronDown } from "lucide-react";
+import { Compass, ArrowUpRight, ChevronDown, Sparkles } from "lucide-react";
 
 export default function Hero() {
   return (
@@ -23,7 +23,7 @@ export default function Hero() {
         {/* Left Column: Typography & CTAs */}
         <div className="lg:col-span-7 flex flex-col justify-center order-2 lg:order-1 text-center lg:text-left">
           
-          {/* Eyebrow Label */}
+          {/* 1. Standard Eyebrow Category Label */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -34,7 +34,7 @@ export default function Hero() {
             <span>Vedic Astrologer & Spiritual Guide</span>
           </motion.div>
 
-          {/* Main Headline */}
+          {/* 2. Main Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -47,7 +47,7 @@ export default function Hero() {
             </span>
           </motion.h1>
 
-          {/* Bio Subtitle */}
+          {/* 3. Bio Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -58,24 +58,36 @@ export default function Hero() {
             and Palmistry to reveal your true purpose, alignment, and modern life direction.
           </motion.p>
 
-          {/* Interactive Action Buttons */}
+          {/* --- REPOSITIONED HERE: Standard Pre-CTA Special Offer Pill --- */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="mt-6 self-center lg:self-start inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-300/60 text-amber-900 text-xs font-medium shadow-2xs backdrop-blur-xs"
+          >
+            <span className="flex h-2 w-2 rounded-full bg-amber-600 animate-pulse" />
+            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+            <span>First-Time Client Special: Free 30-Minute Alignment Session</span>
+          </motion.div>
+
+          {/* 4. Interactive Action Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mt-8"
+            className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mt-6"
           >
             <a
               href="#contact"
               className="group relative inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 via-amber-600 to-orange-600 hover:from-amber-600 hover:to-orange-700 text-white font-medium px-8 py-3.5 rounded-full shadow-[0_6px_25px_rgba(217,119,6,0.3)] hover:shadow-[0_8px_30px_rgba(217,119,6,0.45)] transition-all duration-300 transform hover:-translate-y-0.5"
             >
-              <span>Book Consultation</span>
+              <span>Book Free Session</span>
               <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
 
             <a
               href="#services"
-              className="inline-flex items-center justify-center border border-amber-200/80 bg-white/70 backdrop-blur-md text-slate-700 hover:text-amber-800 hover:border-amber-400/80 hover:bg-white/90 px-8 py-3.5 rounded-full shadow-sm hover:shadow-md transition-all duration-300"
+              className="inline-flex items-center justify-center border border-amber-200/80 bg-white/70 backdrop-blur-md text-slate-700 hover:text-amber-800 hover:border-amber-400/80 hover:bg-white/90 px-8 py-3.5 rounded-full shadow-xs hover:shadow-md transition-all duration-300"
             >
               Explore Services
             </a>
@@ -100,7 +112,7 @@ export default function Hero() {
                 src="/images/Suman.png"
                 alt="Suman Adhikari"
                 fill
-                sizes="(max-w-7xl) 100vw"
+                sizes="(max-width: 1200px) 100vw, 50vw"
                 className="object-cover scale-105 hover:scale-100 transition-transform duration-700 saturate-[1.05]"
                 priority
               />
@@ -140,7 +152,7 @@ export default function Hero() {
           <motion.div
             animate={{ y: [0, 6, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-            className="w-8 h-8 rounded-full border border-amber-300/80 bg-white/60 backdrop-blur-sm flex items-center justify-center shadow-sm group-hover:border-amber-400 group-hover:bg-white transition-all"
+            className="w-8 h-8 rounded-full border border-amber-300/80 bg-white/60 backdrop-blur-xs flex items-center justify-center shadow-xs group-hover:border-amber-400 group-hover:bg-white transition-all"
           >
             <ChevronDown className="w-4 h-4 text-amber-700" />
           </motion.div>

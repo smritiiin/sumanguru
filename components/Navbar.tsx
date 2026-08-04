@@ -10,6 +10,7 @@ const links = [
   { name: "Services", href: "#services" },
   { name: "Expertise", href: "#expertise" },
   { name: "Contact", href: "#contact" },
+  { name: "Calculator", href: "#miniChartCalculator" },
 ];
 
 export default function Navbar() {
