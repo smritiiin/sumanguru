@@ -8,7 +8,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-amber-50/80 via-orange-50/40 to-slate-50 text-slate-900 px-4 sm:px-6 py-20 lg:py-0"
+      className="relative min-h-[calc(100vh-70px)] flex items-center justify-center overflow-hidden bg-gradient-to-b from-amber-50/80 via-orange-50/40 to-slate-50 text-slate-900 px-4 sm:px-6 py-20 lg:py-0"
     >
       {/* Vibrant Ambient Sunlight Glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[550px] h-[350px] sm:h-[550px] bg-gradient-to-tr from-amber-300/35 via-orange-300/25 to-rose-300/20 rounded-full blur-[110px] pointer-events-none" />
