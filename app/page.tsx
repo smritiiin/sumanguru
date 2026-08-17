@@ -30,7 +30,7 @@ import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import MiniChartCalculator from "../components/MiniChartCalculator";
 import HowItWorks from "../components/HowItWorks";
-import FAQSection from "../components/FaqSection";
+import FAQSection from "../components/FAQSection";
 import Testimonials from "../components/Testimonials";
 
 export default function Home() {
