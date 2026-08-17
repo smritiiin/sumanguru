@@ -1,13 +1,24 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
+/* Explicit Light Theme Overrides */
+:root {
+  color-scheme: light;
 }
 
-body {
-  overflow-x: hidden;
+html, body {
+  background-color: #fdfbf7 !important;
+  color: #0f172a !important;
 }
 
+/* Custom Gradient Utilities */
+@layer utilities {
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-amber-700 via-amber-600 to-orange-600;
+  }
+
+  .btn-vibrant-cta {
+    @apply bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-white font-semibold shadow-md shadow-amber-500/20 hover:shadow-lg hover:shadow-amber-500/35 transition-all duration-300 active:scale-95;
+  }
+}
