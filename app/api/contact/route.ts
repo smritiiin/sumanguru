@@ -26,7 +26,7 @@ export async function POST(req: Request) {
     // Send notification email
     const { data, error } = await resend.emails.send({
       from: "Consultation Inquiry <onboarding@resend.dev>",
-      to: ["smritynpl@gmail.com"],
+      to: ["mastermindsu@gmail.com"],
       subject: `New Inquiry: ${service || "General"} from ${name}`,
       reply_to: email,
       html: `

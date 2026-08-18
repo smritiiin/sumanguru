@@ -69,6 +69,7 @@ function ContactFormContent() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showErrors, setShowErrors] = useState(false);
   const [status, setStatus] = useState<{ type: "success" | "error" | null; message: string }>({
     type: null,
     message: "",
@@ -95,6 +96,15 @@ function ContactFormContent() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setShowErrors(true);
+
+    const isPhoneValid = /^(97|98)\d{8}$/.test(formState.phone);
+    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email);
+
+    if (!formState.name.trim() || !isEmailValid || !isPhoneValid) {
+      return;
+    }
+
     setIsSubmitting(true);
     setStatus({ type: null, message: "" });
 
@@ -102,7 +112,10 @@ function ContactFormContent() {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formState),
+        body: JSON.stringify({
+          ...formState,
+          message: formState.message.trim() || "No additional notes provided.",
+        }),
       });
 
       const result = await response.json();
@@ -122,6 +135,7 @@ function ContactFormContent() {
           isFreeSession: true,
           message: "",
         });
+        setShowErrors(false);
       } else {
         throw new Error(result.error || "Failed to transmit message.");
       }
@@ -356,12 +370,14 @@ function ContactFormContent() {
               <label className="text-[11px] font-semibold text-slate-500 uppercase">Your Name</label>
               <input
                 type="text"
-                required
                 value={formState.name}
                 onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                placeholder="e.g. Liam Sharma"
+                placeholder="e.g. Suman Sharma"
                 className="w-full bg-slate-50/50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-amber-500 focus:bg-white focus:ring-1 focus:ring-amber-500 transition-colors"
               />
+              {showErrors && !formState.name.trim() && (
+                <p className="text-[10px] text-red-600 font-medium">Please enter your name.</p>
+              )}
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -369,23 +385,36 @@ function ContactFormContent() {
                 <label className="text-[11px] font-semibold text-slate-500 uppercase">Email Address</label>
                 <input
                   type="email"
-                  required
                   value={formState.email}
                   onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                   placeholder="name@domain.com"
                   className="w-full bg-slate-50/50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-amber-500 focus:bg-white focus:ring-1 focus:ring-amber-500 transition-colors"
                 />
+                {showErrors && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email) && (
+                  <p className="text-[10px] text-red-600 font-medium">Please enter a valid email address.</p>
+                )}
               </div>
 
               <div className="space-y-1">
-                <label className="text-[11px] font-semibold text-slate-500 uppercase">Phone Number</label>
+                <label className="text-[11px] font-semibold text-slate-500 uppercase">
+                  Phone Number
+                </label>
                 <input
                   type="tel"
+                  maxLength={10}
                   value={formState.phone}
-                  onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
-                  placeholder="+977 98XXXXXXXX"
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                    setFormState({ ...formState, phone: val });
+                  }}
+                  placeholder="98XXXXXXXX"
                   className="w-full bg-slate-50/50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-xs text-slate-900 focus:outline-none focus:border-amber-500 focus:bg-white focus:ring-1 focus:ring-amber-500 transition-colors"
                 />
+                {showErrors && !/^(97|98)\d{8}$/.test(formState.phone) && (
+                  <p className="text-[10px] text-red-600 font-medium">
+                    Phone number must start with 97 or 98 and be exactly 10 digits.
+                  </p>
+                )}
               </div>
             </div>
 
@@ -413,10 +442,11 @@ function ContactFormContent() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-[11px] font-semibold text-slate-500 uppercase">Birth Details / Notes</label>
+              <label className="text-[11px] font-semibold text-slate-500 uppercase">
+                Birth Details / Notes <span className="text-slate-400 font-normal lowercase">(optional)</span>
+              </label>
               <textarea
                 rows={3}
-                required
                 value={formState.message}
                 onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                 placeholder="Include date, time, place of birth or preferred appointment timings..."
